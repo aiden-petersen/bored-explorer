@@ -15,6 +15,7 @@ class TokenItem: Hashable {
     var tokenImage: UIImage?
     let id: Int
     let identifier = UUID()
+    var owner: String?
     
     func hash(into hasher: inout Hasher) {
         hasher.combine(identifier)

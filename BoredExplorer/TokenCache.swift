@@ -15,9 +15,13 @@ enum TokenCacheError: Error {
 }
 
 public class TokenCache {
-    public static let publicCache = TokenCache()
     private let cachedImages = NSCache<NSNumber, UIImage>()
     private var loadingResponses = [Int: Task<UIImage, Error>]()
+    private var imageSize: CGSize
+    
+    init(imageSize: CGSize){
+        self.imageSize = imageSize
+    }
     
     public final func image(id: NSNumber) -> UIImage? {
         return cachedImages.object(forKey: id)
@@ -36,8 +40,9 @@ public class TokenCache {
         guard let image = UIImage(data: data) else {
             throw TokenCacheError.ImageDataError
         }
-        self.cachedImages.setObject(image, forKey: tokenId as NSNumber, cost: data.count)
-        return image
+        let resizedImage = resizeImage(image, imageSize);
+        self.cachedImages.setObject(resizedImage, forKey: tokenId as NSNumber, cost: data.count)
+        return resizedImage
     }
 
     // Returns the cached image if available, otherwise asynchronously loads and caches it.
@@ -86,4 +91,31 @@ public class TokenCache {
             loadingResponses.removeValue(forKey: tokenId)
         }
     }
+}
+
+
+func resizeImage(_ image: UIImage, _ targetSize: CGSize) -> UIImage {
+    let size = image.size
+    
+    let widthRatio  = targetSize.width  / size.width
+    let heightRatio = targetSize.height / size.height
+    
+    // Figure out what our orientation is, and use that to form the rectangle
+    var newSize: CGSize
+    if(widthRatio > heightRatio) {
+        newSize = CGSize(width: size.width * heightRatio, height: size.height * heightRatio)
+    } else {
+        newSize = CGSize(width: size.width * widthRatio,  height: size.height * widthRatio)
+    }
+    
+    // This is the rect that we've calculated out and this is what is actually used below
+    let rect = CGRect(x: 0, y: 0, width: newSize.width, height: newSize.height)
+    
+    // Actually do the resizing to the rect using the ImageContext stuff
+    UIGraphicsBeginImageContextWithOptions(newSize, false, 1.0)
+    image.draw(in: rect)
+    let newImage = UIGraphicsGetImageFromCurrentImageContext()
+    UIGraphicsEndImageContext()
+    
+    return newImage!
 }

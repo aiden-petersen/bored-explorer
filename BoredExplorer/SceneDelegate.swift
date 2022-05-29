@@ -16,24 +16,14 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
         // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
+        
+        
+        let rootViewController = ViewController()
+//        let navController = UINavigationController(rootViewController: rootViewController)
+        
         guard let windowScene = (scene as? UIWindowScene) else { return }
         window = UIWindow(frame: windowScene.coordinateSpace.bounds)
         window?.windowScene = windowScene
-        
-        
-        
-        
-        let layout = UICollectionViewFlowLayout()
-        layout.scrollDirection = .vertical
-
-        layout.minimumLineSpacing = 4
-        layout.minimumInteritemSpacing = 0
-        // TODO: this has a rounding problem which leave a line of empty pixels, so we need to round to a whole number. Need to match this with line spacing
-        let itemSize = floor((windowScene.coordinateSpace.bounds.size.width-8)/3)
-        print("itemSize \(itemSize)")
-        layout.itemSize = CGSize(width: itemSize, height: itemSize)
-        let rootViewController = ViewController(collectionViewLayout: layout)
-        
         window?.rootViewController = rootViewController
         window?.makeKeyAndVisible()
     }

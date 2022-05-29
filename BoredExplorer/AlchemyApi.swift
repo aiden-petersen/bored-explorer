@@ -7,6 +7,10 @@
 
 import Foundation
 
+// TODO: would be cool to build these views in ios and expose them to react native, create UI components for react native to consume.
+// ok yeah lets do an animation, have the project
+// ok lets implement a start up animation
+// lets have that page where we click on an item, then navigate to a detailed view of it. Should we be doing this in react native? Nah lets do native for now, should be able to get it done in 2 weeks, then can finish it. Ok next step is to improve the views and loading of them. Lets do that thing where we load 30 of them at a time
 // TODO: move these somewhere else
 let alchemyApiKey = ""
 let boredApeContractAddress = "0xBC4CA0EdA7647A8aB7C2061c2E118A18a936f13D"
@@ -119,6 +123,39 @@ func getNft(tokenId: Int) async throws -> Nft {
     }
     throw GetNftError.RetrievalError
 }
+
+
+enum GetOwnerError: Error {
+    case UrlComponentError
+    case RetrievalError
+}
+
+func getOwner(tokenId: Int) async throws -> String {
+    struct GetOwnersResponse: Codable {
+        let owners: [String]
+    }
+    
+    var urlComponents = URLComponents()
+    urlComponents.scheme = "https"
+    urlComponents.host = "eth-mainnet.alchemyapi.io"
+    urlComponents.path = "/v2/\(alchemyApiKey)/getOwnersForToken"
+    urlComponents.queryItems = [
+        URLQueryItem(name: "contractAddress", value: boredApeContractAddress),
+        URLQueryItem(name: "tokenId", value: String(tokenId))
+    ]
+
+    guard let url = urlComponents.url else {
+        throw GetOwnerError.UrlComponentError
+    }
+    
+    if let (data, _) = try? await URLSession.shared.data(from: url){
+        if let responseObj = try? JSONDecoder().decode(GetOwnersResponse.self, from: data){
+            return responseObj.owners[0]
+        }
+    }
+    throw GetOwnerError.RetrievalError
+}
+
 
 
 func getNftsHelper() async throws -> [Nft] {

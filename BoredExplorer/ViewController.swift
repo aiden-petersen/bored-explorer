@@ -8,68 +8,29 @@
 
 import UIKit
 
-class ViewController: UICollectionViewController, UICollectionViewDataSourcePrefetching {
-    func collectionView(_ collectionView: UICollectionView, prefetchItemsAt indexPaths: [IndexPath]) {
-        print("prefetching for items at \(indexPaths)")
-        indexPaths.forEach { indexPath in
-            let tokenId = self.nftItems[indexPath.row].id
-            TokenCache.publicCache.prefetch(tokenId: tokenId)
-        }
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cancelPrefetchingForItemsAt indexPaths: [IndexPath]) {
-        print("cancel prefetching for items at \(indexPaths)")
-    }
-    
-    var dataSource: UICollectionViewDiffableDataSource<Section, TokenItem>! = nil
-    
-    private var nftItems = [TokenItem]()
-    
+class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
-                
-        let cellRegistration = UICollectionView.CellRegistration<UICollectionViewCell, TokenItem> { (cell, indexPath, item) in
-            var content = UIListContentConfiguration.cell()
-            content.directionalLayoutMargins = .zero
-            content.axesPreservingSuperviewLayoutMargins = []
-            content.image = item.tokenImage
-            content.text = "BAYC"
-            content.secondaryText = "#\(item.id)"
-            content.textProperties.alignment = .center
-            content.secondaryTextProperties.alignment = .center
-            
-            Task {
-                let image = try await TokenCache.publicCache.load(tokenId: item.id)
-                if image != item.tokenImage {
-                    var updatedSnapshot = self.dataSource.snapshot()
-                    if let datasourceIndex = updatedSnapshot.indexOfItem(item) {
-                        let newItem = self.nftItems[datasourceIndex]
-                        newItem.tokenImage = image
-                        updatedSnapshot.reloadItems([newItem])
-                        await self.dataSource.apply(updatedSnapshot, animatingDifferences: true)
-                    }
-                }
-            }
-            cell.contentConfiguration = content
-        }
-
-        dataSource = UICollectionViewDiffableDataSource<Section, TokenItem>(collectionView: collectionView) {
-            (collectionView: UICollectionView, indexPath: IndexPath, item: TokenItem) -> UICollectionViewCell? in
-            return collectionView.dequeueConfiguredReusableCell(using: cellRegistration, for: indexPath, item: item)
-        }
-        collectionView.prefetchDataSource = self
+        view.backgroundColor = .green
         
-        Task {
-            if nftItems.isEmpty {
-                let nftIds = await getNftIdsForCollection()
-                for tokenId in nftIds {
-                    self.nftItems.append(TokenItem(id: tokenId))
-                }
-                var initialSnapshot = NSDiffableDataSourceSnapshot<Section, TokenItem>()
-                initialSnapshot.appendSections(Section.allCases)
-                initialSnapshot.appendItems(self.nftItems, toSection: Section.all)
-                await self.dataSource.apply(initialSnapshot, animatingDifferences: true)
-            }
-        }
+        let stackView = UIStackView()
+        stackView.backgroundColor = .yellow
+        view.addSubview(stackView);
+        
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
+        stackView.heightAnchor.constraint(equalTo: view.heightAnchor).isActive = true
+        stackView.axis = .vertical
+        stackView.alignment = .trailing
+
+
+        let tokenCollectionView = TokenCollectionViewController(collectionViewLayout: UICollectionViewFlowLayout())
+        self.addChild(tokenCollectionView)
+        stackView.addArrangedSubview(tokenCollectionView.view)
+        tokenCollectionView.didMove(toParent: self)
+
+        tokenCollectionView.view.translatesAutoresizingMaskIntoConstraints = false
+        tokenCollectionView.view.widthAnchor.constraint(equalTo: stackView.widthAnchor).isActive = true
+        tokenCollectionView.view.heightAnchor.constraint(equalTo: stackView.heightAnchor, multiplier: 0.9).isActive = true
     }
 }
