@@ -7,29 +7,33 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E421C78D2857E1830015955F /* TokenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E421C78C2857E1830015955F /* TokenViewController.swift */; };
+		E421C79428633BCD0015955F /* OwnerCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = E421C79328633BCD0015955F /* OwnerCache.swift */; };
 		E426A79E28432C85007871D0 /* TokenCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E426A79D28432C85007871D0 /* TokenCollectionViewController.swift */; };
+		E426A7A028478114007871D0 /* TokenCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E426A79F28478114007871D0 /* TokenCell.swift */; };
 		E498FE2428141EB400665222 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E498FE2328141EB400665222 /* AppDelegate.swift */; };
 		E498FE2628141EB400665222 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E498FE2528141EB400665222 /* SceneDelegate.swift */; };
-		E498FE2828141EB400665222 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E498FE2728141EB400665222 /* ViewController.swift */; };
 		E498FE2D28141EB500665222 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E498FE2C28141EB500665222 /* Assets.xcassets */; };
 		E498FE3028141EB500665222 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E498FE2E28141EB500665222 /* LaunchScreen.storyboard */; };
 		E498FE3B281AA76F00665222 /* AlchemyApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = E498FE3A281AA76F00665222 /* AlchemyApi.swift */; };
-		E498FE3F281E959E00665222 /* TokenCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = E498FE3E281E959E00665222 /* TokenCache.swift */; };
-		E498FE43281E96A700665222 /* TokenItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = E498FE42281E96A700665222 /* TokenItem.swift */; };
+		E498FE3F281E959E00665222 /* ThumbnailCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = E498FE3E281E959E00665222 /* ThumbnailCache.swift */; };
+		E498FE43281E96A700665222 /* TokenMetadata.swift in Sources */ = {isa = PBXBuildFile; fileRef = E498FE42281E96A700665222 /* TokenMetadata.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		E421C78C2857E1830015955F /* TokenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenViewController.swift; sourceTree = "<group>"; };
+		E421C79328633BCD0015955F /* OwnerCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OwnerCache.swift; sourceTree = "<group>"; };
 		E426A79D28432C85007871D0 /* TokenCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenCollectionViewController.swift; sourceTree = "<group>"; };
+		E426A79F28478114007871D0 /* TokenCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenCell.swift; sourceTree = "<group>"; };
 		E498FE2028141EB400665222 /* BoredExplorer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BoredExplorer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E498FE2328141EB400665222 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E498FE2528141EB400665222 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		E498FE2728141EB400665222 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		E498FE2C28141EB500665222 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E498FE2F28141EB500665222 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E498FE3128141EB500665222 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E498FE3A281AA76F00665222 /* AlchemyApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlchemyApi.swift; sourceTree = "<group>"; };
-		E498FE3E281E959E00665222 /* TokenCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenCache.swift; sourceTree = "<group>"; };
-		E498FE42281E96A700665222 /* TokenItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenItem.swift; sourceTree = "<group>"; };
+		E498FE3E281E959E00665222 /* ThumbnailCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThumbnailCache.swift; sourceTree = "<group>"; };
+		E498FE42281E96A700665222 /* TokenMetadata.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenMetadata.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -43,6 +47,33 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		E421C78E2857E23D0015955F /* viewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				E421C78C2857E1830015955F /* TokenViewController.swift */,
+				E426A79D28432C85007871D0 /* TokenCollectionViewController.swift */,
+			);
+			path = viewControllers;
+			sourceTree = "<group>";
+		};
+		E421C78F2857E3130015955F /* services */ = {
+			isa = PBXGroup;
+			children = (
+				E498FE3E281E959E00665222 /* ThumbnailCache.swift */,
+				E498FE3A281AA76F00665222 /* AlchemyApi.swift */,
+				E421C79328633BCD0015955F /* OwnerCache.swift */,
+			);
+			path = services;
+			sourceTree = "<group>";
+		};
+		E421C7902857E3340015955F /* components */ = {
+			isa = PBXGroup;
+			children = (
+				E426A79F28478114007871D0 /* TokenCell.swift */,
+			);
+			path = components;
+			sourceTree = "<group>";
+		};
 		E498FE1728141EB400665222 = {
 			isa = PBXGroup;
 			children = (
@@ -62,16 +93,15 @@
 		E498FE2228141EB400665222 /* BoredExplorer */ = {
 			isa = PBXGroup;
 			children = (
-				E426A79D28432C85007871D0 /* TokenCollectionViewController.swift */,
+				E421C7902857E3340015955F /* components */,
+				E421C78F2857E3130015955F /* services */,
+				E421C78E2857E23D0015955F /* viewControllers */,
 				E498FE2328141EB400665222 /* AppDelegate.swift */,
 				E498FE2528141EB400665222 /* SceneDelegate.swift */,
-				E498FE2728141EB400665222 /* ViewController.swift */,
 				E498FE2C28141EB500665222 /* Assets.xcassets */,
 				E498FE2E28141EB500665222 /* LaunchScreen.storyboard */,
 				E498FE3128141EB500665222 /* Info.plist */,
-				E498FE3A281AA76F00665222 /* AlchemyApi.swift */,
-				E498FE3E281E959E00665222 /* TokenCache.swift */,
-				E498FE42281E96A700665222 /* TokenItem.swift */,
+				E498FE42281E96A700665222 /* TokenMetadata.swift */,
 			);
 			path = BoredExplorer;
 			sourceTree = "<group>";
@@ -150,12 +180,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E498FE3F281E959E00665222 /* TokenCache.swift in Sources */,
+				E421C79428633BCD0015955F /* OwnerCache.swift in Sources */,
+				E498FE3F281E959E00665222 /* ThumbnailCache.swift in Sources */,
 				E498FE3B281AA76F00665222 /* AlchemyApi.swift in Sources */,
-				E498FE2828141EB400665222 /* ViewController.swift in Sources */,
 				E498FE2428141EB400665222 /* AppDelegate.swift in Sources */,
+				E421C78D2857E1830015955F /* TokenViewController.swift in Sources */,
 				E498FE2628141EB400665222 /* SceneDelegate.swift in Sources */,
-				E498FE43281E96A700665222 /* TokenItem.swift in Sources */,
+				E426A7A028478114007871D0 /* TokenCell.swift in Sources */,
+				E498FE43281E96A700665222 /* TokenMetadata.swift in Sources */,
 				E426A79E28432C85007871D0 /* TokenCollectionViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
